@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
 
     public void ReduceHealth(float _damage)
     {
-        if(health - _damage !< 0)
+        if(health - _damage < 0)
         {
             health -= _damage;
         }

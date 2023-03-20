@@ -53,8 +53,11 @@
     <UnityVersion>2020.3.26f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\carButton.cs" />
     <Compile Include="Assets\Scripts\Volume.cs" />
+    <Compile Include="Assets\Scripts\DetectCar.cs" />
     <Compile Include="Assets\Scripts\FiniteStateMachine.cs" />
+    <Compile Include="Assets\Scripts\CarMove.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
     <Compile Include="Assets\Scripts\Ammo.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
@@ -62,7 +65,7 @@
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\TrafficLight.cs" />
     <Compile Include="Assets\Scripts\Class.cs" />
-    <Compile Include="Assets\Scripts\DetectCar.cs" />
+    <Compile Include="Assets\Scripts\CarSteer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
