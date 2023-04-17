@@ -38,7 +38,7 @@ public class CarSteer : MonoBehaviour
         {
             if(steerImage.transform.position.x != steerPos)
             {
-                steerImage.transform.position = Vector3.Lerp(steerImage.transform.position, new Vector3(steerPos, )
+                steerImage.transform.position = Vector3.Lerp(steerImage.transform.position, new Vector3(steerPos, 0f, 0f), 1f);
             }
         }
     }
