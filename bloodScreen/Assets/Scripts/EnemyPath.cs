@@ -14,9 +14,15 @@ public class EnemyPath : MonoBehaviour
 
     [SerializeField] float stoppingDistance;
 
-    [SerializeField] float detectionDistance;
+    [SerializeField]
+    float detectionDistance,
+        walkSpeed,
+        runSpeed;
+
 
     public StateMachine StateMachine { get; private set; }
+
+    private Animator animC;
 
     private void Awake()
     {
@@ -26,6 +32,8 @@ public class EnemyPath : MonoBehaviour
         {
             Debug.LogError("Need Navmesh Agent attached");
         }
+
+        animC = GetComponentInChildren<Animator>();
     }
     // Start is called before the first frame update
     void Start()
@@ -77,6 +85,9 @@ public class EnemyPath : MonoBehaviour
             Debug.Log("moveState");
             //set agent to stopped
             instance.agent.isStopped = false;
+            instance.animC.SetTrigger("Walk");
+
+            instance.agent.speed = instance.walkSpeed;
         }
         public override void OnUpdate()
         {
@@ -96,6 +107,11 @@ public class EnemyPath : MonoBehaviour
                 instance.StateMachine.SetState(new IdleState(instance));
             }
         }
+
+        public override void OnExit()
+        {
+            instance.animC.ResetTrigger("Walk");
+        }
     }
 
     public class IdleState : EnemyMoveState
@@ -109,6 +125,7 @@ public class EnemyPath : MonoBehaviour
         {
             Debug.Log("IdleState");
             instance.agent.isStopped = true;
+            instance.animC.SetTrigger("Idle"); 
         }
 
         public override void OnUpdate()
@@ -123,6 +140,11 @@ public class EnemyPath : MonoBehaviour
                 instance.StateMachine.SetState(new MoveState(instance));
             }
         }
+
+        public override void OnExit()
+        {
+            instance.animC.ResetTrigger("Idle");
+        }
     }
 
     public class ChaseState : MoveState
@@ -136,6 +158,8 @@ public class EnemyPath : MonoBehaviour
         {
             Debug.Log("ChaseState");
             instance.agent.isStopped = false;
+            instance.animC.SetTrigger("Run");
+            instance.agent.speed = instance.runSpeed;
         }
 
         public override void OnUpdate()
@@ -148,6 +172,11 @@ public class EnemyPath : MonoBehaviour
             {
                 instance.StateMachine.SetState(new IdleState(instance));
             }
+        }
+
+        public override void OnExit()
+        {
+            instance.animC.ResetTrigger("Run");
         }
 
     }
